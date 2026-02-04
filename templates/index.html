@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PsyWar Detector</title>
+</head>
+
+<body style="font-family:Arial;text-align:center">
+
+<h2>🧠 PsyWar & Fake News Detector</h2>
+
+<textarea id="text" rows="6" cols="50"
+placeholder="Paste news or post here"></textarea>
+
+<br><br>
+
+<button onclick="analyze()">Analyze</button>
+
+<p id="result"></p>
+
+<script>
+function analyze(){
+  fetch("/analyze",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      text:document.getElementById("text").value
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    document.getElementById("result").innerText = d.result
+  })
+}
+</script>
+
+</body>
+</html>
